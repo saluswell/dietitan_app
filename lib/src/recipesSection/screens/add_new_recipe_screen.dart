@@ -151,278 +151,290 @@ class _AddNewRecipeScreenState extends State<AddNewRecipeScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: recipesProvider.recipeImage == null
                           ? Container(
+                        height: 150,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            color: AppColors.lightdarktextcolor
+                                .withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(7)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: ((context) =>
+                                        SimpleDialog(
+                                          title: const Text(
+                                            "Select Docs",
+                                            style: TextStyle(
+                                                color:
+                                                AppColors.whitecolor),
+                                          ),
+                                          children: [
+                                            Row(
+                                              children: [
+                                                SimpleDialogOption(
+                                                  child: Row(
+                                                    children: const [
+                                                      Icon(
+                                                        Icons.image,
+                                                        color: AppColors
+                                                            .whitecolor,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        "Gallery",
+                                                        style: TextStyle(
+                                                            color: AppColors
+                                                                .whitecolor),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  onPressed: () {
+                                                    //
+                                                    recipesProvider
+                                                        .pickRecipeImage(
+                                                        context,
+                                                        ImageSource
+                                                            .gallery);
+                                                    Navigator.pop(
+                                                        context);
+                                                    //
+                                                  },
+                                                ),
+                                                SimpleDialogOption(
+                                                  child: Row(
+                                                    children: const [
+                                                      Icon(
+                                                        Icons.camera_alt,
+                                                        color: AppColors
+                                                            .whitecolor,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        "Camera",
+                                                        style: TextStyle(
+                                                            color: AppColors
+                                                                .whitecolor),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  onPressed: () {
+                                                    recipesProvider
+                                                        .pickRecipeImage(
+                                                        context,
+                                                        ImageSource
+                                                            .camera);
+                                                    Navigator.pop(
+                                                        context);
+                                                  },
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        )));
+                                //  getImage(true);
+                              },
+                              child: Container(
+                                height: 47,
+                                width: 145,
+                                decoration: BoxDecoration(
+                                    color: AppColors.lightwhitecolor,
+                                    borderRadius:
+                                    BorderRadius.circular(7)),
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.add,
+                                        color: AppColors.appcolor,
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text("Add Image",
+                                          style: TextStyle(
+                                            // fontFamily: 'Gilroy',
+                                              color: AppColors.blackcolor,
+                                              // decoration: TextDecoration.underline,
+                                              fontWeight: FontWeight.bold,
+                                              fontFamily: 'Axiforma',
+                                              fontSize: 13)),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const Text("Preview will appear here ",
+                                style: TextStyle(
+                                  // fontFamily: 'Gilroy',
+                                    color: AppColors.appcolor,
+                                    // decoration: TextDecoration.underline,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Axiforma',
+                                    fontSize: 13)),
+                            const Text(" after uploading",
+                                style: TextStyle(
+                                  // fontFamily: 'Gilroy',
+                                    color: AppColors.appcolor,
+                                    // decoration: TextDecoration.underline,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Axiforma',
+                                    fontSize: 13)),
+                          ],
+                        ),
+                      )
+                          : Stack(
+                        children: [
+                          Container(
                               height: 150,
                               width: double.infinity,
+                              // child: SvgPicture.asset(
+                              //   Res.invitefriendbanner,
+                              //   fit: BoxFit.cover,
+                              // ),
                               decoration: BoxDecoration(
-                                  color: AppColors.lightdarktextcolor
-                                      .withOpacity(0.3),
-                                  borderRadius: BorderRadius.circular(7)),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: ((context) => SimpleDialog(
-                                                title: const Text(
-                                                  "Select Docs",
-                                                  style: TextStyle(
-                                                      color:
-                                                          AppColors.whitecolor),
-                                                ),
-                                                children: [
-                                                  Row(
+                                borderRadius: BorderRadius.circular(17),
+                                border: Border.all(
+                                    width: 3, color: AppColors.appcolor),
+                                //shape: BoxShape.circle,
+
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: FileImage(
+                                      recipesProvider.recipeImage!),
+                                ),
+                              )),
+                          Positioned.fill(
+                            top: -60,
+                            child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: Container(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColors.appcolor,
+                                  ),
+                                  child: Center(
+                                    child: IconButton(
+                                        icon: const Icon(
+                                          Icons.camera_alt_outlined,
+                                          color: Colors.white,
+                                          size: 19,
+                                        ),
+                                        onPressed: () {
+                                          showDialog(
+                                              context: context,
+                                              builder:
+                                              ((context) =>
+                                                  SimpleDialog(
+                                                    title: const Text(
+                                                      "Select Docs",
+                                                      style: TextStyle(
+                                                          color: AppColors
+                                                              .whitecolor),
+                                                    ),
                                                     children: [
-                                                      SimpleDialogOption(
-                                                        child: Row(
-                                                          children: const [
-                                                            Icon(
-                                                              Icons.image,
-                                                              color: AppColors
-                                                                  .whitecolor,
+                                                      Row(
+                                                        children: [
+                                                          SimpleDialogOption(
+                                                            child:
+                                                            Row(
+                                                              children: const [
+                                                                Icon(
+                                                                  Icons.image,
+                                                                  color:
+                                                                  AppColors
+                                                                      .whitecolor,
+                                                                ),
+                                                                SizedBox(
+                                                                  width:
+                                                                  10,
+                                                                ),
+                                                                Text(
+                                                                  "Gallery",
+                                                                  style:
+                                                                  TextStyle(
+                                                                      color: AppColors
+                                                                          .whitecolor),
+                                                                ),
+                                                              ],
                                                             ),
-                                                            SizedBox(
-                                                              width: 10,
-                                                            ),
-                                                            Text(
-                                                              "Gallery",
-                                                              style: TextStyle(
-                                                                  color: AppColors
-                                                                      .whitecolor),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        onPressed: () {
-                                                          //
-                                                          recipesProvider
-                                                              .pickRecipeImage(
+                                                            onPressed:
+                                                                () {
+                                                              //
+                                                              recipesProvider
+                                                                  .pickRecipeImage(
                                                                   context,
                                                                   ImageSource
                                                                       .gallery);
-                                                          Navigator.pop(
-                                                              context);
-                                                          //
-                                                        },
-                                                      ),
-                                                      SimpleDialogOption(
-                                                        child: Row(
-                                                          children: const [
-                                                            Icon(
-                                                              Icons.camera_alt,
-                                                              color: AppColors
-                                                                  .whitecolor,
+                                                              Navigator.pop(
+                                                                  context);
+                                                              //
+                                                            },
+                                                          ),
+                                                          SimpleDialogOption(
+                                                            child:
+                                                            Row(
+                                                              children: const [
+                                                                Icon(
+                                                                  Icons
+                                                                      .camera_alt,
+                                                                  color:
+                                                                  AppColors
+                                                                      .whitecolor,
+                                                                ),
+                                                                SizedBox(
+                                                                  width:
+                                                                  10,
+                                                                ),
+                                                                Text(
+                                                                  "Camera",
+                                                                  style:
+                                                                  TextStyle(
+                                                                      color: AppColors
+                                                                          .whitecolor),
+                                                                ),
+                                                              ],
                                                             ),
-                                                            SizedBox(
-                                                              width: 10,
-                                                            ),
-                                                            Text(
-                                                              "Camera",
-                                                              style: TextStyle(
-                                                                  color: AppColors
-                                                                      .whitecolor),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        onPressed: () {
-                                                          recipesProvider
-                                                              .pickRecipeImage(
+                                                            onPressed:
+                                                                () {
+                                                              recipesProvider
+                                                                  .pickRecipeImage(
                                                                   context,
                                                                   ImageSource
                                                                       .camera);
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                      ),
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                          ),
+                                                        ],
+                                                      )
                                                     ],
-                                                  )
-                                                ],
-                                              )));
-                                      //  getImage(true);
-                                    },
-                                    child: Container(
-                                      height: 47,
-                                      width: 145,
-                                      decoration: BoxDecoration(
-                                          color: AppColors.lightwhitecolor,
-                                          borderRadius:
-                                              BorderRadius.circular(7)),
-                                      child: Center(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.add,
-                                              color: AppColors.appcolor,
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text("Add Image",
-                                                style: TextStyle(
-                                                    // fontFamily: 'Gilroy',
-                                                    color: AppColors.blackcolor,
-                                                    // decoration: TextDecoration.underline,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontFamily: 'Axiforma',
-                                                    fontSize: 13)),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  const Text("Preview will appear here ",
-                                      style: TextStyle(
-                                          // fontFamily: 'Gilroy',
-                                          color: AppColors.appcolor,
-                                          // decoration: TextDecoration.underline,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: 'Axiforma',
-                                          fontSize: 13)),
-                                  const Text(" after uploading",
-                                      style: TextStyle(
-                                          // fontFamily: 'Gilroy',
-                                          color: AppColors.appcolor,
-                                          // decoration: TextDecoration.underline,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: 'Axiforma',
-                                          fontSize: 13)),
-                                ],
-                              ),
-                            )
-                          : Stack(
-                              children: [
-                                Container(
-                                    height: 150,
-                                    width: double.infinity,
-                                    // child: SvgPicture.asset(
-                                    //   Res.invitefriendbanner,
-                                    //   fit: BoxFit.cover,
-                                    // ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(17),
-                                      border: Border.all(
-                                          width: 3, color: AppColors.appcolor),
-                                      //shape: BoxShape.circle,
-
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: FileImage(
-                                            recipesProvider.recipeImage!),
-                                      ),
-                                    )),
-                                Positioned.fill(
-                                  top: -60,
-                                  child: Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(right: 10),
-                                      child: Container(
-                                        height: 40,
-                                        width: 40,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: AppColors.appcolor,
-                                        ),
-                                        child: Center(
-                                          child: IconButton(
-                                              icon: const Icon(
-                                                Icons.camera_alt_outlined,
-                                                color: Colors.white,
-                                                size: 19,
-                                              ),
-                                              onPressed: () {
-                                                showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        ((context) =>
-                                                            SimpleDialog(
-                                                              title: const Text(
-                                                                "Select Docs",
-                                                                style: TextStyle(
-                                                                    color: AppColors
-                                                                        .whitecolor),
-                                                              ),
-                                                              children: [
-                                                                Row(
-                                                                  children: [
-                                                                    SimpleDialogOption(
-                                                                      child:
-                                                                          Row(
-                                                                        children: const [
-                                                                          Icon(
-                                                                            Icons.image,
-                                                                            color:
-                                                                                AppColors.whitecolor,
-                                                                          ),
-                                                                          SizedBox(
-                                                                            width:
-                                                                                10,
-                                                                          ),
-                                                                          Text(
-                                                                            "Gallery",
-                                                                            style:
-                                                                                TextStyle(color: AppColors.whitecolor),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                      onPressed:
-                                                                          () {
-                                                                        //
-                                                                        recipesProvider.pickRecipeImage(
-                                                                            context,
-                                                                            ImageSource.gallery);
-                                                                        Navigator.pop(
-                                                                            context);
-                                                                        //
-                                                                      },
-                                                                    ),
-                                                                    SimpleDialogOption(
-                                                                      child:
-                                                                          Row(
-                                                                        children: const [
-                                                                          Icon(
-                                                                            Icons.camera_alt,
-                                                                            color:
-                                                                                AppColors.whitecolor,
-                                                                          ),
-                                                                          SizedBox(
-                                                                            width:
-                                                                                10,
-                                                                          ),
-                                                                          Text(
-                                                                            "Camera",
-                                                                            style:
-                                                                                TextStyle(color: AppColors.whitecolor),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                      onPressed:
-                                                                          () {
-                                                                        recipesProvider.pickRecipeImage(
-                                                                            context,
-                                                                            ImageSource.camera);
-                                                                        Navigator.pop(
-                                                                            context);
-                                                                      },
-                                                                    ),
-                                                                  ],
-                                                                )
-                                                              ],
-                                                            )));
-                                                // getImage(true);
-                                              }),
-                                        ),
-                                      ),
-                                    ),
+                                                  )));
+                                          // getImage(true);
+                                        }),
                                   ),
                                 ),
-                              ],
-                            )),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 15, vertical: 15),
@@ -487,92 +499,95 @@ class _AddNewRecipeScreenState extends State<AddNewRecipeScreen> {
                       onTap: () {
                         DialogHelper.showBottomSheet(
                             widget: Container(
-                          height: 300,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 30,
-                              ),
-                              Text(
-                                "Choose Meal Type",
-                                style: fontW5S12(context)!.copyWith(
-                                    fontSize: 16,
-                                    color: AppColors.blackcolor,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Expanded(
-                                child: ListView.builder(
-                                    itemCount: recipesProvider.mealType.length,
-                                    padding: EdgeInsets.only(bottom: 20),
-                                    itemBuilder: (context, index) {
-                                      final dietItems =
-                                          Provider.of<RecipesProvider>(context)
-                                              .mealType;
-                                      final item = dietItems[index];
+                              height: 300,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                  Text(
+                                    "Choose Meal Type",
+                                    style: fontW5S12(context)!.copyWith(
+                                        fontSize: 16,
+                                        color: AppColors.blackcolor,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Expanded(
+                                    child: ListView.builder(
+                                        itemCount: recipesProvider.mealType
+                                            .length,
+                                        padding: EdgeInsets.only(bottom: 20),
+                                        itemBuilder: (context, index) {
+                                          final dietItems =
+                                              Provider
+                                                  .of<RecipesProvider>(context)
+                                                  .mealType;
+                                          final item = dietItems[index];
 
-                                      final isSelected = recipesProvider
-                                          .selectedMealType
-                                          .contains(item);
-                                      return Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 12, vertical: 5),
-                                        child: InkWell(
-                                          onTap: () {
-                                            Provider.of<RecipesProvider>(
+                                          final isSelected = recipesProvider
+                                              .selectedMealType
+                                              .contains(item);
+                                          return Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 12, vertical: 5),
+                                            child: InkWell(
+                                              onTap: () {
+                                                Provider.of<RecipesProvider>(
                                                     context,
                                                     listen: false)
-                                                .toggleMealTypeSelection(index);
-                                          },
-                                          child: SizedBox(
-                                            height: 50,
-                                            child: Card(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
+                                                    .toggleMealTypeSelection(
+                                                    index);
+                                              },
+                                              child: SizedBox(
+                                                height: 50,
+                                                child: Card(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
                                                       BorderRadius.circular(7)),
-                                              elevation: 4,
-                                              child: Padding(
-                                                padding:
+                                                  elevation: 4,
+                                                  child: Padding(
+                                                    padding:
                                                     const EdgeInsets.symmetric(
                                                         horizontal: 12),
-                                                child: Row(
-                                                  mainAxisAlignment:
+                                                    child: Row(
+                                                      mainAxisAlignment:
                                                       MainAxisAlignment
                                                           .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      item,
-                                                      style: TextStyle(
-                                                          fontSize: 14,
-                                                          fontWeight:
+                                                      children: [
+                                                        Text(
+                                                          item,
+                                                          style: TextStyle(
+                                                              fontSize: 14,
+                                                              fontWeight:
                                                               FontWeight.w600,
-                                                          color: AppColors
-                                                              .blackcolor),
-                                                    ),
-                                                    Container(
-                                                      child: isSelected
-                                                          ? Icon(
-                                                              Icons.check,
                                                               color: AppColors
-                                                                  .appcolor,
-                                                            )
-                                                          : null,
-                                                    )
-                                                  ],
+                                                                  .blackcolor),
+                                                        ),
+                                                        Container(
+                                                          child: isSelected
+                                                              ? Icon(
+                                                            Icons.check,
+                                                            color: AppColors
+                                                                .appcolor,
+                                                          )
+                                                              : null,
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                              )
-                            ],
-                          ),
-                        ));
+                                          );
+                                        }),
+                                  )
+                                ],
+                              ),
+                            ));
                       },
                       child: TextFieldWidget(
                           showSuffixIcon: true,
@@ -736,7 +751,7 @@ class _AddNewRecipeScreenState extends State<AddNewRecipeScreen> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                     child: Row(
                       children: [
                         Text(
@@ -755,65 +770,69 @@ class _AddNewRecipeScreenState extends State<AddNewRecipeScreen> {
                       onTap: () {
                         DialogHelper.showBottomSheet(
                             widget: Container(
-                          height: 500,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 30,
-                              ),
-                              Text(
-                                "Choose Allergens",
-                                style: fontW5S12(context)!.copyWith(
-                                    fontSize: 16,
-                                    color: AppColors.blackcolor,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Expanded(
-                                child: ListView.builder(
-                                    itemCount: recipesProvider.foodItems.length,
-                                    padding: EdgeInsets.only(bottom: 20),
-                                    itemBuilder: (context, index) {
-                                      final foodItems =
-                                          Provider.of<RecipesProvider>(context)
-                                              .foodItems;
-                                      final item = foodItems[index];
+                              height: 500,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                  Text(
+                                    "Choose Allergens",
+                                    style: fontW5S12(context)!.copyWith(
+                                        fontSize: 16,
+                                        color: AppColors.blackcolor,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Expanded(
+                                    child: ListView.builder(
+                                        itemCount: recipesProvider.foodItems
+                                            .length,
+                                        padding: EdgeInsets.only(bottom: 20),
+                                        itemBuilder: (context, index) {
+                                          final foodItems =
+                                              Provider
+                                                  .of<RecipesProvider>(context)
+                                                  .foodItems;
+                                          final item = foodItems[index];
 
-                                      final isSelected = recipesProvider
-                                          .selectedFoodItems
-                                          .contains(item);
-                                      return SizedBox(
-                                        height: 50,
-                                        child: ListTile(
-                                          title: Text(
-                                            item,
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                                color: AppColors.blackcolor),
-                                          ),
-                                          trailing: isSelected
-                                              ? Icon(
-                                                  Icons.check,
-                                                  color: AppColors.appcolor,
-                                                )
-                                              : null,
-                                          onTap: () {
-                                            Provider.of<RecipesProvider>(
+                                          final isSelected = recipesProvider
+                                              .selectedFoodItems
+                                              .contains(item);
+                                          return SizedBox(
+                                            height: 50,
+                                            child: ListTile(
+                                              title: Text(
+                                                item,
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: AppColors
+                                                        .blackcolor),
+                                              ),
+                                              trailing: isSelected
+                                                  ? Icon(
+                                                Icons.check,
+                                                color: AppColors.appcolor,
+                                              )
+                                                  : null,
+                                              onTap: () {
+                                                Provider.of<RecipesProvider>(
                                                     context,
                                                     listen: false)
-                                                .toggleAllergenSelection(index);
-                                          },
-                                        ),
-                                      );
-                                    }),
-                              )
-                            ],
-                          ),
-                        ));
+                                                    .toggleAllergenSelection(
+                                                    index);
+                                              },
+                                            ),
+                                          );
+                                        }),
+                                  )
+                                ],
+                              ),
+                            ));
                       },
                       child: TextFieldWidget(
                           showSuffixIcon: true,
@@ -837,7 +856,7 @@ class _AddNewRecipeScreenState extends State<AddNewRecipeScreen> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                     child: Row(
                       children: [
                         Text(
@@ -949,7 +968,7 @@ class _AddNewRecipeScreenState extends State<AddNewRecipeScreen> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                     child: Row(
                       children: [
                         Text(
@@ -1045,7 +1064,7 @@ class _AddNewRecipeScreenState extends State<AddNewRecipeScreen> {
                                           width: 20,
                                           decoration: BoxDecoration(
                                               borderRadius:
-                                                  BorderRadius.circular(33),
+                                              BorderRadius.circular(33),
                                               color: AppColors.redcolor),
                                           child: Center(
                                             child: Icon(
@@ -1111,7 +1130,7 @@ class _AddNewRecipeScreenState extends State<AddNewRecipeScreen> {
                               showSuffixIcon: false,
                               suffixIcon: Icon(Icons.arrow_drop_down_outlined),
                               controller:
-                                  recipesProvider.carbohydratesController,
+                              recipesProvider.carbohydratesController,
                               textFieldHeight: 45,
                               enabled: true,
                               maxlines: 1,
@@ -1284,7 +1303,7 @@ class _AddNewRecipeScreenState extends State<AddNewRecipeScreen> {
                     child: TextFieldWidget(
                         showSuffixIcon: false,
                         controller:
-                            recipesProvider.breakDownOfEssentialsController,
+                        recipesProvider.breakDownOfEssentialsController,
                         textFieldHeight: 55,
                         maxlines: 10,
                         maxLengt: 2500,
