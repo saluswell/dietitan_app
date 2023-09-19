@@ -19,4 +19,5 @@ class FirebaseUtils {
 
   static String healthtips = "healthtips";
   static String recipes = "recipes";
+  static String workouts = "workouts";
 }

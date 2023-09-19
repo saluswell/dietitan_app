@@ -614,30 +614,122 @@ class _AddNewRecipeScreenState extends State<AddNewRecipeScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: TextFieldWidget(
-                        showSuffixIcon: false,
-                        suffixIcon: Icon(Icons.arrow_drop_down_outlined),
-                        controller: recipesProvider.dietTypeController,
-                        textFieldHeight: 45,
-                        enabled: true,
-                        maxlines: 1,
-                        maxLengt: 2500,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please enter diet type";
-                          }
-                          return null;
-                        },
+                    child: InkWell(
+                      onTap: () {
+                        DialogHelper.showBottomSheet(
+                            widget: Container(
+                          height: 450,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 30,
+                              ),
+                              Text(
+                                "Choose Diet Type",
+                                style: fontW5S12(context)!.copyWith(
+                                    fontSize: 16,
+                                    color: AppColors.blackcolor,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Expanded(
+                                child: ListView.builder(
+                                    itemCount: recipesProvider.dietTypes.length,
+                                    padding: EdgeInsets.only(bottom: 20),
+                                    itemBuilder: (context, index) {
+                                      final dietItems =
+                                          Provider.of<RecipesProvider>(context)
+                                              .dietTypes;
+                                      final item = dietItems[index];
 
-                        // validator: (value) {
-                        //   if (value!.isEmpty) {
-                        //     return "Please enter recipe steps";
-                        //   }
-                        //   return null;
-                        // },
-                        toppadding: 20,
-                        hintText: "Enter Diet Types",
-                        textInputType: TextInputType.emailAddress),
+                                      final isSelected = recipesProvider
+                                          .selectedDietTypes
+                                          .contains(item);
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12, vertical: 5),
+                                        child: InkWell(
+                                          onTap: () {
+                                            Provider.of<RecipesProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .toggleDietTypeSelection(index);
+                                          },
+                                          child: SizedBox(
+                                            height: 50,
+                                            child: Card(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(7)),
+                                              elevation: 4,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 12),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      item,
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: AppColors
+                                                              .blackcolor),
+                                                    ),
+                                                    Container(
+                                                      child: isSelected
+                                                          ? Icon(
+                                                              Icons.check,
+                                                              color: AppColors
+                                                                  .appcolor,
+                                                            )
+                                                          : null,
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                              )
+                            ],
+                          ),
+                        ));
+                      },
+                      child: TextFieldWidget(
+                          showSuffixIcon: true,
+                          suffixIcon: Icon(Icons.arrow_drop_down_outlined),
+                          controller: recipesProvider.dietTypeController,
+                          textFieldHeight: 45,
+                          enabled: false,
+                          maxlines: 1,
+                          maxLengt: 2500,
+                          // validator: (value) {
+                          //   if (value!.isEmpty) {
+                          //     return "Please enter diet type";
+                          //   }
+                          //   return null;
+                          // },
+
+                          // validator: (value) {
+                          //   if (value!.isEmpty) {
+                          //     return "Please enter recipe steps";
+                          //   }
+                          //   return null;
+                          // },
+                          toppadding: 20,
+                          hintText: "Select Diet Type",
+                          textInputType: TextInputType.emailAddress),
+                    ),
                   ),
                   SizedBox(
                     height: 5,
@@ -762,83 +854,84 @@ class _AddNewRecipeScreenState extends State<AddNewRecipeScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: InkWell(
                       onTap: () {
-                        // DialogHelper.showBottomSheet(
-                        //     widget: Container(
-                        //   height: 500,
-                        //   child: Column(
-                        //     crossAxisAlignment: CrossAxisAlignment.center,
-                        //     children: [
-                        //       SizedBox(
-                        //         height: 30,
-                        //       ),
-                        //       Text(
-                        //         "Choose Conditions",
-                        //         style: fontW5S12(context)!.copyWith(
-                        //             fontSize: 16,
-                        //             color: AppColors.blackcolor,
-                        //             fontWeight: FontWeight.w600),
-                        //       ),
-                        //       SizedBox(
-                        //         height: 20,
-                        //       ),
-                        //       Expanded(
-                        //         child: ListView.builder(
-                        //             itemCount:
-                        //                 recipesProvider.recipeConditions.length,
-                        //             padding: EdgeInsets.only(bottom: 20),
-                        //             itemBuilder: (context, index) {
-                        //               final foodItems =
-                        //                   Provider.of<RecipesProvider>(context)
-                        //                       .recipeConditions;
-                        //               final item = foodItems[index];
-                        //
-                        //               final isSelected = recipesProvider
-                        //                   .selectedRecipeConditions
-                        //                   .contains(item);
-                        //               return SizedBox(
-                        //                 height: 50,
-                        //                 child: ListTile(
-                        //                   title: Text(
-                        //                     item.name,
-                        //                     style: TextStyle(
-                        //                         fontSize: 14,
-                        //                         fontWeight: FontWeight.w600,
-                        //                         color: AppColors.blackcolor),
-                        //                   ),
-                        //                   trailing: isSelected
-                        //                       ? Icon(
-                        //                           Icons.check,
-                        //                           color: AppColors.appcolor,
-                        //                         )
-                        //                       : null,
-                        //                   onTap: () {
-                        //                     Provider.of<RecipesProvider>(context,
-                        //                             listen: false)
-                        //                         .toggleRecipeConditionsSelection(
-                        //                             index);
-                        //                   },
-                        //                 ),
-                        //               );
-                        //             }),
-                        //       )
-                        //     ],
-                        //   ),
-                        // ));
+                        DialogHelper.showBottomSheet(
+                            widget: Container(
+                          height: 500,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 30,
+                              ),
+                              Text(
+                                "Choose Conditions",
+                                style: fontW5S12(context)!.copyWith(
+                                    fontSize: 16,
+                                    color: AppColors.blackcolor,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Expanded(
+                                child: ListView.builder(
+                                    itemCount:
+                                        recipesProvider.recipeConditions.length,
+                                    padding: EdgeInsets.only(bottom: 20),
+                                    itemBuilder: (context, index) {
+                                      final foodItems =
+                                          Provider.of<RecipesProvider>(context)
+                                              .recipeConditions;
+                                      final item = foodItems[index];
+
+                                      final isSelected = recipesProvider
+                                          .selectedRecipeConditions
+                                          .contains(item);
+                                      return SizedBox(
+                                        height: 50,
+                                        child: ListTile(
+                                          title: Text(
+                                            item.toString(),
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600,
+                                                color: AppColors.blackcolor),
+                                          ),
+                                          trailing: isSelected
+                                              ? Icon(
+                                                  Icons.check,
+                                                  color: AppColors.appcolor,
+                                                )
+                                              : null,
+                                          onTap: () {
+                                            Provider.of<RecipesProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .toggleRecipeConditionsSelection(
+                                                    index);
+                                          },
+                                        ),
+                                      );
+                                    }),
+                              )
+                            ],
+                          ),
+                        ));
                       },
                       child: TextFieldWidget(
-                          showSuffixIcon: false,
+                          showSuffixIcon: true,
                           suffixIcon: Icon(Icons.arrow_drop_down_outlined),
                           controller: recipesProvider.conditionsController,
                           textFieldHeight: 45,
-                          enabled: true,
+                          enabled: false,
                           maxlines: 1,
                           maxLengt: 2500,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Please enter conditions";
-                            }
-                            return null;
-                          },
+                          // validator: (value) {
+                          //   if (value!.isEmpty) {
+                          //     return "Please enter conditions";
+                          //   }
+                          //   return null;
+                          // },
 
                           // validator: (value) {
                           //   if (value!.isEmpty) {
@@ -847,7 +940,7 @@ class _AddNewRecipeScreenState extends State<AddNewRecipeScreen> {
                           //   return null;
                           // },
                           toppadding: 20,
-                          hintText: "Enter Conditions",
+                          hintText: "Select Conditions",
                           textInputType: TextInputType.emailAddress),
                     ),
                   ),
@@ -880,7 +973,7 @@ class _AddNewRecipeScreenState extends State<AddNewRecipeScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: TextFieldWidget(
                         showSuffixIcon: false,
-                        // controller: recipesProvider.recipeIngredientsController,
+                         controller: recipesProvider.recipeIngredientsController,
                         suffixIcon: Icon(Icons.add),
                         textFieldHeight: 55,
                         maxlines: 1,
@@ -894,6 +987,7 @@ class _AddNewRecipeScreenState extends State<AddNewRecipeScreen> {
                         onCompleted: (val) {
                           if (val.isNotEmpty) {
                             recipesProvider.addIngredientsToList(val);
+
                           }
                         },
                         toppadding: 18,

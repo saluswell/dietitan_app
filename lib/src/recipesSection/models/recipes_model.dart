@@ -13,36 +13,36 @@ String articleModelToJson(RecipesModel data) =>
     json.encode(data.toJson(data.recipeId.toString()));
 
 class RecipesModel {
-  RecipesModel({
-    this.userId,
-    this.recipeId,
-    this.recipeTitle,
-    this.conditions,
-    this.meals,
-    this.dietTypes,
-    this.ingredients,
-    this.allergens,
-    this.directions,
-    this.breakdownOfEssentialIngredients,
-    this.recipeDescription,
-    this.recipeImage,
-    this.isApprovedByAdmin,
-    this.dateCreated,
-    this.categoryType,
-    this.calories,
-    this.carbohydrates,
-    this.protein,
-    this.fiber,
-    this.sodium,
-    this.sugar,
-  });
+  RecipesModel(
+      {this.userId,
+      this.recipeId,
+      this.recipeTitle,
+      this.conditions,
+      this.meals,
+      this.dietTypes,
+      this.ingredients,
+      this.allergens,
+      this.directions,
+      this.breakdownOfEssentialIngredients,
+      this.recipeDescription,
+      this.recipeImage,
+      this.isApprovedByAdmin,
+      this.dateCreated,
+      this.categoryType,
+      this.calories,
+      this.carbohydrates,
+      this.protein,
+      this.fiber,
+      this.sodium,
+      this.sugar,
+      this.isApproved});
 
   String? userId;
   String? recipeId;
   String? recipeTitle;
-  String? conditions;
+  List<String>? conditions;
   List<String>? meals;
-  String? dietTypes;
+  List<String>? dietTypes;
   List<String>? ingredients;
   List<String>? allergens;
   String? directions;
@@ -59,34 +59,37 @@ class RecipesModel {
   String? fiber;
   String? sodium;
   String? sugar;
+  bool? isApproved;
 
   factory RecipesModel.fromJson(Map<String, dynamic> json) => RecipesModel(
-        userId: json["userID"],
-        recipeId: json["recipeId"],
-        recipeTitle: json["recipeTitle"],
-        recipeDescription: json["recipeDescription"],
-        recipeImage: json["recipeImage"],
-        isApprovedByAdmin: json["isApprovedByAdmin"],
-        dateCreated: json["dateCreated"],
-        categoryType: json["categoryType"],
-        meals: json["meals"] == null ? [] : List<String>.from(json["meals"]),
-        ingredients: json["ingredients"] == null
-            ? []
-            : List<String>.from(json["ingredients"]),
-        allergens: json["allergens"] == null
-            ? []
-            : List<String>.from(json["allergens"]),
-        calories: json["calories"],
-        carbohydrates: json["carbohydrates"],
-        protein: json["protein"],
-        fiber: json["fiber"],
-        sodium: json["sodium"],
-        sugar: json["sugar"],
-        directions: json["directions"],
-        dietTypes: json["dietTypes"],
-        breakdownOfEssentialIngredients:
-            json["breakdownOfEssentialIngredients"],
-      );
+      userId: json["userID"],
+      recipeId: json["recipeId"],
+      recipeTitle: json["recipeTitle"],
+      conditions: json["conditions"] == null
+          ? []
+          : List<String>.from(json["conditions"]),
+      recipeDescription: json["recipeDescription"],
+      recipeImage: json["recipeImage"],
+      isApprovedByAdmin: json["isApprovedByAdmin"],
+      dateCreated: json["dateCreated"],
+      categoryType: json["categoryType"],
+      meals: json["meals"] == null ? [] : List<String>.from(json["meals"]),
+      ingredients: json["ingredients"] == null
+          ? []
+          : List<String>.from(json["ingredients"]),
+      allergens:
+          json["allergens"] == null ? [] : List<String>.from(json["allergens"]),
+      calories: json["calories"],
+      carbohydrates: json["carbohydrates"],
+      protein: json["protein"],
+      fiber: json["fiber"],
+      sodium: json["sodium"],
+      sugar: json["sugar"],
+      directions: json["directions"],
+      dietTypes:
+          json["dietTypes"] == null ? [] : List<String>.from(json["dietTypes"]),
+      breakdownOfEssentialIngredients: json["breakdownOfEssentialIngredients"],
+      isApproved: json["isApproved"]);
 
   Map<String, dynamic> toJson(String docID) => {
         "userID": userId,
@@ -110,5 +113,6 @@ class RecipesModel {
         "fiber": fiber,
         "sodium": sodium,
         "sugar": sugar,
+        "isApproved": isApproved
       };
 }

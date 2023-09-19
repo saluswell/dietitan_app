@@ -14,6 +14,7 @@ import '../../authenticationsection/Models/userModel.dart';
 import '../../authenticationsection/providers/authProvider.dart';
 import '../../authenticationsection/services/userServices.dart';
 import '../../notificationSection/screens/notificationListScreen.dart';
+import '../../workOutSection/screens/workouts_list.dart';
 import '../help_center.dart';
 import '../privacy_policy.dart';
 import '../terms_and_conditions.dart';
@@ -306,6 +307,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       const SizedBox(
                         height: 6,
                       ),
+
                       MyAccountCardWidgets(
                         height: 22,
                         width: 22,
@@ -314,6 +316,27 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                         suffixicon: Res.arrowforward,
                         ontap: () {
                           toNext(context: context, widget: RecipesListScreen());
+                        },
+                      ),
+
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      Divider(
+                        color: AppColors.lightdarktextcolor.withOpacity(0.7),
+                      ),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      MyAccountCardWidgets(
+                        height: 22,
+                        width: 22,
+                        text: "Workouts",
+                        prefixicon: Res.helpercenter,
+                        suffixicon: Res.arrowforward,
+                        ontap: () {
+                          toNext(
+                              context: context, widget: WorkoutsListScreen());
                         },
                       ),
 

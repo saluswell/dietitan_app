@@ -270,9 +270,9 @@ class RecipesProvider extends ChangeNotifier {
             userId: getUserID(),
             recipeTitle: recipeTitleController.text,
             meals: selectedMealType,
-            dietTypes: dietTypeController.text,
+            dietTypes: selectedDietTypes,
             allergens: _selectedFoodItems,
-            conditions: conditionsController.text,
+            conditions: selectedRecipeConditions,
             ingredients: ingredients,
             directions: recipeStepsController.text,
             breakdownOfEssentialIngredients:
@@ -300,6 +300,22 @@ class RecipesProvider extends ChangeNotifier {
             context: navstate.currentState!.context,
             content:
                 "Recipe Uploaded Successfully wait for approval from admin");
+        recipeImage = null;
+        recipeTitleController.clear();
+        selectedMealType.clear();
+        selectedDietTypes.clear();
+        selectedFoodItems.clear();
+        selectedRecipeConditions.clear();
+        ingredients!.clear();
+        recipeStepsController.clear();
+        breakDownOfEssentialsController.clear();
+        caloriesController.clear();
+        sodiumController.clear();
+        carbohydratesController.clear();
+        proteinController.clear();
+        fiberController.clear();
+        sugarController.clear();
+
         Navigator.maybePop(navstate.currentState!.context);
       }
     } on FirebaseException catch (e) {

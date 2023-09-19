@@ -28,6 +28,7 @@ import 'package:saluswell_dietitan_app_updated/src/onboardingsection/screens/onb
 import 'package:saluswell_dietitan_app_updated/src/recipesSection/providers/recipes_provider.dart';
 import 'package:saluswell_dietitan_app_updated/src/resourcesSection/healthTipsSection/providers/resourceProvider.dart';
 import 'package:saluswell_dietitan_app_updated/src/reviewsSection/providers/review_provider.dart';
+import 'package:saluswell_dietitan_app_updated/src/workOutSection/providers/workout_provider.dart';
 
 import 'common/helperFunctions/navigatorHelper.dart';
 import 'common/utils/themes.dart';
@@ -150,6 +151,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => DiagnosticProvider()),
         ChangeNotifierProvider(create: (context) => MealPlanProvider()),
         ChangeNotifierProvider(create: (context) => RecipesProvider()),
+        ChangeNotifierProvider(create: (context) => WorkoutProvider()),
       ],
       child: GestureDetector(
         onTap: () {

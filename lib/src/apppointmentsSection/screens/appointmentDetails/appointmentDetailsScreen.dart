@@ -2,7 +2,6 @@ import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:saluswell_dietitan_app_updated/common/widgets/button_widget.dart';
-
 import '../../../../common/helperFunctions/getUserIDhelper.dart';
 import '../../../../common/helperFunctions/hive_local_storage.dart';
 import '../../../../common/helperFunctions/navigatorHelper.dart';
@@ -419,26 +418,59 @@ class _AppointmentDetailsScreenState extends State<AppointmentDetailsScreen> {
               height: 25,
             ),
             if (currentUserType == "Dietitian") ...[
-              CommonButtonWidget(
-                  text: "Care Goal Plan",
-                  bordercolor: AppColors.darkAppColor,
-                  textfont: 13,
-                  buttonHeight: 45,
-                  horizontalPadding: 15,
-                  backgroundcolor: AppColors.darkAppColor,
-                  onTap: () {
-                    toNext(
-                        context: context,
-                        widget: NutritionCarePlan(
-                          appointmentID: widget
-                              .appointmentModelNew.appointmentId
-                              .toString(),
-                          patientID:
-                              widget.appointmentModelNew.patientId.toString(),
-                          dietitianID:
-                              widget.appointmentModelNew.dietitianId.toString(),
-                        ));
-                  }),
+              Row(
+                children: [
+                  Expanded(
+                    child: CommonButtonWidget(
+                        text: "Nutrition Care Plan",
+                        bordercolor: AppColors.darkAppColor,
+                        textfont: 12,
+                        buttonHeight: 45,
+                        horizontalPadding: 0,
+                        backgroundcolor: AppColors.darkAppColor,
+                        onTap: () {
+                          toNext(
+                              context: context,
+                              widget: NutritionCarePlan(
+                                appointmentID: widget
+                                    .appointmentModelNew.appointmentId
+                                    .toString(),
+                                patientID: widget.appointmentModelNew.patientId
+                                    .toString(),
+                                dietitianID: widget
+                                    .appointmentModelNew.dietitianId
+                                    .toString(),
+                              ));
+                        }),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: CommonButtonWidget(
+                        text: "Care Goal Plan",
+                        bordercolor: AppColors.darkAppColor,
+                        textfont: 12,
+                        buttonHeight: 45,
+                        horizontalPadding: 0,
+                        backgroundcolor: AppColors.darkAppColor,
+                        onTap: () {
+                          // toNext(
+                          //     context: context,
+                          //     widget: NutritionCarePlan(
+                          //       appointmentID: widget
+                          //           .appointmentModelNew.appointmentId
+                          //           .toString(),
+                          //       patientID: widget.appointmentModelNew.patientId
+                          //           .toString(),
+                          //       dietitianID: widget
+                          //           .appointmentModelNew.dietitianId
+                          //           .toString(),
+                          //     ));
+                        }),
+                  ),
+                ],
+              ),
             ] else ...[
               CommonButtonWidget(
                   text: "SOAP Notes",

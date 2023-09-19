@@ -398,21 +398,52 @@ class RecipeDetailScreen extends StatelessWidget {
             SizedBox(
               height: 15,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    recipesModel.dietTypes.toString(),
-                    style: fontW5S12(context)!.copyWith(
-                        fontSize: 12,
-                        color: AppColors.blackcolor,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ],
-              ),
-            ),
+            ListView.builder(
+                itemCount: recipesModel.dietTypes!.length,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.only(top: 10, left: 20, right: 8),
+                itemBuilder: ((context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 8,
+                          width: 8,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(33),
+                              color: AppColors.appcolor),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Text(
+                          recipesModel.dietTypes![index].toString(),
+                          style: fontW5S12(context)!.copyWith(
+                              fontSize: 12,
+                              color: AppColors.darkAppColor,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ],
+                    ),
+                  );
+                })),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 12),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.start,
+            //     children: [
+            //       Text(
+            //         recipesModel.dietTypes.toString(),
+            //         style: fontW5S12(context)!.copyWith(
+            //             fontSize: 12,
+            //             color: AppColors.blackcolor,
+            //             fontWeight: FontWeight.w500),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             SizedBox(
               height: 15,
             ),
@@ -436,17 +467,17 @@ class RecipeDetailScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    recipesModel.directions.toString(),
-                    style: fontW5S12(context)!.copyWith(
-                        fontSize: 12,
-                        color: AppColors.blackcolor,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ],
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                child: RichText(
+                    textAlign: TextAlign.start,
+                    text: TextSpan(
+                      text: recipesModel.directions.toString(),
+                      style: fontW5S12(context)!.copyWith(
+                          fontSize: 12,
+                          color: AppColors.blackcolor,
+                          fontWeight: FontWeight.w500),
+                    )),
               ),
             ),
             SizedBox(
@@ -472,17 +503,18 @@ class RecipeDetailScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    recipesModel.breakdownOfEssentialIngredients.toString(),
-                    style: fontW5S12(context)!.copyWith(
-                        fontSize: 12,
-                        color: AppColors.blackcolor,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ],
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                child: RichText(
+                    textAlign: TextAlign.start,
+                    text: TextSpan(
+                      text: recipesModel.breakdownOfEssentialIngredients
+                          .toString(),
+                      style: fontW5S12(context)!.copyWith(
+                          fontSize: 12,
+                          color: AppColors.blackcolor,
+                          fontWeight: FontWeight.w500),
+                    )),
               ),
             ),
             SizedBox(

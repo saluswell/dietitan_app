@@ -20,4 +20,20 @@ class CommonMethods {
       return null;
     }
   }
+
+  static Future<XFile?> getVideo(ImageSource imageSource) async {
+    ImagePicker picker = ImagePicker();
+    try {
+      return await picker.pickVideo(
+          // preferredCameraDevice: CameraDevice.,
+          // imageQuality: 35,
+          source: imageSource,
+          maxDuration: Duration(hours: 1));
+
+      // Otherwise open camera to get new photo
+    } on Exception catch (e) {
+      dp(msg: "Error in picking image", arg: e);
+      return null;
+    }
+  }
 }
