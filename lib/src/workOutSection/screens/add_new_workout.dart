@@ -142,17 +142,10 @@ class _AddNewWorkoutScreenState extends State<AddNewWorkoutScreen> {
                     child: Row(
                       children: [
                         Text(
-                          "Choose Workout Image",
+                          "Choose Workout Video",
                           style: fontW5S12(context)!.copyWith(
                               fontSize: 16,
                               color: AppColors.blackcolor,
-                              fontWeight: FontWeight.w400),
-                        ),
-                        Text(
-                          " (Max Size: 5 Mb)",
-                          style: fontW5S12(context)!.copyWith(
-                              fontSize: 16,
-                              color: AppColors.lightdarktextcolor,
                               fontWeight: FontWeight.w400),
                         ),
                       ],

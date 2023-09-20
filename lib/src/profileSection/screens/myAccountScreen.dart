@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:saluswell_dietitan_app_updated/src/mealPlansSection/screens/create_meal_plan_screen.dart';
 import 'package:saluswell_dietitan_app_updated/src/recipesSection/screens/reccipes_list_screen.dart';
 
 import '../../../common/helperFunctions/navigatorHelper.dart';
@@ -337,6 +338,26 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                         ontap: () {
                           toNext(
                               context: context, widget: WorkoutsListScreen());
+                        },
+                      ),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      Divider(
+                        color: AppColors.lightdarktextcolor.withOpacity(0.7),
+                      ),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      MyAccountCardWidgets(
+                        height: 22,
+                        width: 22,
+                        text: "Meal Plans",
+                        prefixicon: Res.helpercenter,
+                        suffixicon: Res.arrowforward,
+                        ontap: () {
+                          toNext(
+                              context: context, widget: CreateMealPlanScreen());
                         },
                       ),
 

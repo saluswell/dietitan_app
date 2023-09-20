@@ -75,6 +75,7 @@ dependencies:
   syncfusion_flutter_charts: any
   video_player: ^2.7.2
   video_thumbnail: ^0.5.3
+  im_stepper: ^1.0.1+1
 #  time_slot: ^0.0.3
 
 #  easy_date_timeline: ^0.0.6
